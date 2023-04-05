@@ -6,7 +6,7 @@ import Home from "./components/Home/Home";
 import Category from "./components/Category/Category";
 import SingleProduct from "./components/SingleProduct/SingleProduct";
 import Newsletter from "./components/Footer/Newsletter/Newsletter";
-// import AppContext from "./utils/context";
+import AppContext from "./utils/context";
 
 const router = createBrowserRouter([
   {
@@ -26,9 +26,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <main>
-      <Header />
-      <RouterProvider router={router}> </RouterProvider> <Newsletter />
-      <Footer />
+      <AppContext>
+        <Header />
+        <RouterProvider router={router}> </RouterProvider> <Newsletter />
+        <Footer />
+      </AppContext>{" "}
     </main>
   );
 }

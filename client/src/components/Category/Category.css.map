@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "Category.scss",
+        "../../css-config/mixins.scss"
+    ],
+    "names": [],
+    "file": "Category.css"
+}
