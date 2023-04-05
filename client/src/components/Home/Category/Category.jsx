@@ -1,6 +1,25 @@
+// import { useNavigate } from "react-router-dom";
 import "./Category.scss";
+import cart1 from "../../../assets/category/cat-1.jpg";
 const Category = () => {
-    return <div>Category</div>;
+  return (
+    <div className='shop-by-category'>
+      <div className='categories'>
+        <div className='category'>
+          <img src={cart1} alt='category' />
+        </div>
+        <div className='category'>
+          <img src={cart1} alt='category' />
+        </div>
+        <div className='category'>
+          <img src={cart1} alt='category' />
+        </div>
+        <div className='category'>
+          <img src={cart1} alt='category' />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Category;
