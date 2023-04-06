@@ -4,12 +4,14 @@ import { TbSearch } from "react-icons/tb";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
 import "./Header.scss";
-// import Search from "./Search/Search";
+import Search from "./Search/Search";
+import Cart from "../Cart/Cart";
 // import { Context } from "../../utils/context";
-// import Cart from "../Cart/Cart";
 const Header = () => {
   //nav bar sticky
   const [scrolled, setScrolled] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
   }, []);
@@ -23,23 +25,28 @@ const Header = () => {
   };
 
   return (
-    <header className={`main-header ${scrolled ? "stickey-header" : ""}`}>
-      <div className='header-content'>
-        <ul className='left'>
-          <li>Home</li>
-          <li>About</li>
-          <li>Categories</li>
-        </ul>
-        <div className='center'>DEVSTORE.</div>
-        <div className='right'>
-          <TbSearch /> <AiOutlineHeart />
-          <span className='cart-icon'>
-            <CgShoppingCart />
-            <span>0</span>
-          </span>
+    <>
+      <header className={`main-header ${scrolled ? "stickey-header" : ""}`}>
+        <div className='header-content'>
+          <ul className='left'>
+            <li>Home</li>
+            <li>About</li>
+            <li>Categories</li>
+          </ul>
+          <div className='center'>DEVSTORE.</div>
+          <div className='right'>
+            <TbSearch onClick={() => setShowSearch(true)} /> <AiOutlineHeart />
+            <span className='cart-icon' onClick={() => setShowCart(true)}>
+              <CgShoppingCart />
+
+              <span>0</span>
+            </span>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      {showCart && <Cart setShowCart={setShowCart} />}
+      {showSearch && <Search setShowSearch={setShowSearch} />}
+    </>
   );
 };
 
