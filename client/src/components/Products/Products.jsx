@@ -5,8 +5,8 @@ const Products = ({ products, innerPage, headingText }) => {
     <div className='products-container'>
       {!innerPage && <div className='sec-heading'>{headingText}</div>}
       <div className='products'>
-        {products.data.map((item) => (
-          <Product key={item.id} id={item.id} data={item.attributes} />
+        {products?.data?.map((item) => (
+          <Product key={item.id} id={item?.id} data={item?.attributes} />
         ))}
       </div>
     </div>
