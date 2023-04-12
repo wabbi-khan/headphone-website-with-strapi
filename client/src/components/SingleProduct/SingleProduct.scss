@@ -22,10 +22,11 @@
                 flex-shrink: 0;
                 @include md {
                     width: 600px;
-                    height: 600px;
+                    height: 500px;
                 }
                 img {
-                    width: 100%;
+                    width: 80%;
+                    margin: auto;
                     display: block;
                 }
             }

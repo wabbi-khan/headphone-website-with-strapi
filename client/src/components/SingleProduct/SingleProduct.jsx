@@ -1,7 +1,7 @@
 // import { useContext, useState } from "react";
 // import { Context } from "../../utils/context";
-// import { useParams } from "react-router-dom";
-// import useFetch from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
 import {
   FaFacebookF,
@@ -12,19 +12,29 @@ import {
   FaCartPlus,
 } from "react-icons/fa";
 import "./SingleProduct.scss";
-import prod from "../../assets/products/earbuds-prod-1.webp";
+// import prod from "../../assets/products/earbuds-prod-1.webp";
 const SingleProduct = () => {
+  const { id } = useParams();
+  const { data } = useFetch(`/api/products?populate=*&[filters][id]=${id}`);
+  if (!data) return;
+  const product = data?.data?.[0]?.attributes;
   return (
     <div className='single-product-main-content'>
       <div className='layout'>
         <div className='single-product-page'>
           <div className='left'>
-            <img src={prod} alt='sinlge product img' />
+            <img
+              src={
+                process.env.REACT_APP_DEV_URL +
+                product?.img?.data[0]?.attributes.url
+              }
+              alt='sinlge product img'
+            />
           </div>
           <div className='right'>
-            <span className='name'>Product Title</span>
-            <span className='price'>$ Product price</span>
-            <span className='desc'> product description</span>
+            <span className='name'>{product.title}</span>
+            <span className='price'>$ {product.price}</span>
+            <span className='desc'>{product.desc}</span>
 
             <div className='cart-buttons'>
               <div className='quantity-buttons'>
@@ -56,12 +66,7 @@ const SingleProduct = () => {
             <div className='info-item'>
               <span className='text-bold'>
                 Category:
-                {/* <span>
-                                    {
-                                        product.categories.data[0].attributes
-                                            .title
-                                    }
-                                </span> */}
+                <span> {product.categories.data[0].attributes.title}</span>
               </span>
               <span className='text-bold'>
                 Share:
