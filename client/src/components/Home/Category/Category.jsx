@@ -1,6 +1,6 @@
 // import { useNavigate } from "react-router-dom";
 import "./Category.scss";
-import cart1 from "../../../assets/category/cat-1.jpg";
+// import cart1 from "../../../assets/category/cat-1.jpg";
 const Category = ({ categories }) => {
   // console.log(categories);
   return (
