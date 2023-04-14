@@ -1,4 +1,4 @@
-// import { useContext, useState } from "react";
+import { useContext, useState } from "react";
 // import { Context } from "../../utils/context";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
@@ -14,6 +14,16 @@ import {
 import "./SingleProduct.scss";
 // import prod from "../../assets/products/earbuds-prod-1.webp";
 const SingleProduct = () => {
+  const [quantity, setQuantity] = useState(1);
+  const increment = () => {
+    setQuantity(quantity + 1);
+  };
+  const decrement = () => {
+    setQuantity((prevState) => {
+      if (prevState === 1) return 1;
+      return prevState - 1;
+    });
+  };
   const { id } = useParams();
   const { data } = useFetch(`/api/products?populate=*&[filters][id]=${id}`);
   if (!data) return;
@@ -32,23 +42,15 @@ const SingleProduct = () => {
             />
           </div>
           <div className='right'>
-            <span className='name'>{product.title}</span>
-            <span className='price'>$ {product.price}</span>
-            <span className='desc'>{product.desc}</span>
+            <span className='name'>{product?.title}</span>
+            <span className='price'>$ {product?.price}</span>
+            <span className='desc'>{product?.desc}</span>
 
             <div className='cart-buttons'>
               <div className='quantity-buttons'>
-                <span
-                //  onClick={decrement}
-                >
-                  -
-                </span>
-                <span>{/* {quantity} */}</span>
-                <span
-                //  onClick={increment}
-                >
-                  +
-                </span>
+                <span onClick={decrement}>-</span>
+                <span>{quantity}</span>
+                <span onClick={increment}>+</span>
               </div>
               <button
                 className='add-to-cart-button'
@@ -66,7 +68,7 @@ const SingleProduct = () => {
             <div className='info-item'>
               <span className='text-bold'>
                 Category:
-                <span> {product.categories.data[0].attributes.title}</span>
+                <span> {product?.categories?.data[0]?.attributes?.title}</span>
               </span>
               <span className='text-bold'>
                 Share:
@@ -82,8 +84,8 @@ const SingleProduct = () => {
           </div>
         </div>
         <RelatedProducts
-        // productId={id}
-        // categoryId={product.categories.data[0].id}
+          productId={id}
+          categoryId={product.categories.data[0].id}
         />
       </div>
     </div>

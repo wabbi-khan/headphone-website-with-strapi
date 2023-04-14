@@ -1,4 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import {
+  useEffect,
+  useState,
+  // , useContext
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { TbSearch } from "react-icons/tb";
 import { CgShoppingCart } from "react-icons/cg";
@@ -8,6 +12,7 @@ import Search from "./Search/Search";
 import Cart from "../Cart/Cart";
 // import { Context } from "../../utils/context";
 const Header = () => {
+  const navigate = useNavigate();
   //nav bar sticky
   const [scrolled, setScrolled] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -29,11 +34,13 @@ const Header = () => {
       <header className={`main-header ${scrolled ? "stickey-header" : ""}`}>
         <div className='header-content'>
           <ul className='left'>
-            <li>Home</li>
+            <li onClick={() => navigate("/")}>Home</li>
             <li>About</li>
             <li>Categories</li>
           </ul>
-          <div className='center'>DEVSTORE.</div>
+          <div className='center' onClick={() => navigate("/")}>
+            DEVSTORE.
+          </div>
           <div className='right'>
             <TbSearch onClick={() => setShowSearch(true)} /> <AiOutlineHeart />
             <span className='cart-icon' onClick={() => setShowCart(true)}>
