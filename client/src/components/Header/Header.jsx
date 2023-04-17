@@ -1,4 +1,5 @@
 import {
+  useContext,
   useEffect,
   useState,
   // , useContext
@@ -10,8 +11,9 @@ import { AiOutlineHeart } from "react-icons/ai";
 import "./Header.scss";
 import Search from "./Search/Search";
 import Cart from "../Cart/Cart";
-// import { Context } from "../../utils/context";
+import { Context } from "../../utils/context";
 const Header = () => {
+  const { cartCount } = useContext(Context);
   const navigate = useNavigate();
   //nav bar sticky
   const [scrolled, setScrolled] = useState(false);
@@ -46,7 +48,7 @@ const Header = () => {
             <span className='cart-icon' onClick={() => setShowCart(true)}>
               <CgShoppingCart />
 
-              <span>0</span>
+              {!!cartCount && <span>{cartCount}</span>}
             </span>
           </div>
         </div>

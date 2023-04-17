@@ -12,9 +12,14 @@ import {
   FaCartPlus,
 } from "react-icons/fa";
 import "./SingleProduct.scss";
+import { Context } from "../../utils/context";
 // import prod from "../../assets/products/earbuds-prod-1.webp";
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
+
+  const { id } = useParams();
+  const { data } = useFetch(`/api/products?populate=*&[filters][id]=${id}`);
+  const { handleAddToCart } = useContext(Context);
   const increment = () => {
     setQuantity(quantity + 1);
   };
@@ -24,8 +29,6 @@ const SingleProduct = () => {
       return prevState - 1;
     });
   };
-  const { id } = useParams();
-  const { data } = useFetch(`/api/products?populate=*&[filters][id]=${id}`);
   if (!data) return;
   const product = data?.data?.[0]?.attributes;
   return (
@@ -54,10 +57,10 @@ const SingleProduct = () => {
               </div>
               <button
                 className='add-to-cart-button'
-                // onClick={() => {
-                //     handleAddToCart(data?.data?.[0], quantity);
-                //     setQuantity(1);
-                // }}
+                onClick={() => {
+                  handleAddToCart(data?.data?.[0], quantity);
+                  setQuantity(1);
+                }}
               >
                 <FaCartPlus size={20} />
                 ADD TO CART
